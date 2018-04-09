@@ -16,6 +16,7 @@ const buildControls = (props) => (
         label={jsUcfirst(ingredient)}
         addIngredient={() => props.addIngredient(ingredient)}
         removeIngredient={() => props.removeIngredient(ingredient)}
+        disabled={props.disabledInfo[ingredient]}
         />
     )}
   </div>
