@@ -11,8 +11,14 @@ const controls = [
 
 const buildControls = (props) => (
   <div className={classes.BuildControls}>
-  {controls.map(control => <BuildControl key={control.label} label={control.label}/>)}
+    {Object.keys(props.ingredients).map(
+      ingredient => <BuildControl key={ingredient} label={jsUcfirst(ingredient)}/>
+    )}
   </div>
 );
+
+function jsUcfirst(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
 export default buildControls;
