@@ -5,7 +5,7 @@ import { jsUcfirst } from '../../../common/HelperFunctions';
 const orderSummary = (props) => {
 
   const ingredientSummary = Object.keys(props.ingredients)
-                              .map(ingredient => <li>{jsUcfirst(ingredient)}: {props.ingredients[ingredient]}</li>);
+                              .map(ingredient => <li key={ingredient}>{jsUcfirst(ingredient)}: {props.ingredients[ingredient]}</li>);
   return (
     <Aux>
       <h3>Your order</h3>
@@ -13,6 +13,7 @@ const orderSummary = (props) => {
       <ul>
         {ingredientSummary}
       </ul>
+      <p>Continure to checkout?</p>
     </Aux>
   )
 }
