@@ -8,4 +8,4 @@ const button = (props) => (
       classes[props.btnType]
     ].join(' ')}>{props.children}</button>
 )
- export default button;
+export default button;
