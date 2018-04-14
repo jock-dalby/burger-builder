@@ -3,7 +3,7 @@ import Aux from '../../../hoc/Aux';
 import { jsUcfirst } from '../../../common/HelperFunctions';
 import Button from '../../UI/Button/Button';
 
-const orderSummary = (props) => {
+const orderSummary = props => {
 
   const ingredientSummary = Object.keys(props.ingredients)
                               .map(ingredient => <li key={ingredient}>{jsUcfirst(ingredient)}: {props.ingredients[ingredient]}</li>);
