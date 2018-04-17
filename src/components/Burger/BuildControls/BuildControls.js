@@ -3,13 +3,6 @@ import classes from './BuildControls.css';
 import BuildControl from './BuildControl/BuildControl';
 import { jsUcfirst } from '../../../common/HelperFunctions';
 
-const controls = [
-  { label: 'Salad', type: 'salad'},
-  { label: 'Bacon', type: 'bacon'},
-  { label: 'Cheese', type: 'cheese'},
-  { label: 'Meat', type: 'meat'},
-]
-
 const buildControls = props => (
   <div className={classes.BuildControls}>
     <p>Current price: <strong>${props.totalPrice.toFixed(2)}</strong></p>
