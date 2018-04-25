@@ -6,8 +6,8 @@ import Backdrop from '../Backdrop/Backdrop';
 class Modal extends Component {
 
   shouldComponentUpdate(nextProps, nextState) {
-    // Will only update when modal is shown and hidden
-    return nextProps.show !== this.props.show;
+    // Will only update when modal is shown and hidden and when spinner and orderSummary are toggled
+    return (nextProps.show !== this.props.show) || (nextProps.children !== this.props.children);
   }
 
   render() {
