@@ -7,11 +7,57 @@ import axios from '../../../axios-orders';
 
 class ContactDetails extends Component {
   state = {
-    name: null,
-    email: null,
-    address: {
-      street: null,
-      postcode: null
+    orderForm: {
+      name: {
+        elementType:'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your name'
+        },
+        value:''
+      },
+      street: {
+        elementType:'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your street'
+        },
+        value:''
+      },
+      postCode: {
+        elementType:'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your postcode'
+        },
+        value:''
+      },
+      country: {
+        elementType:'input',
+        elementConfig: {
+          type: 'text',
+          placeholder: 'Your country'
+        },
+        value:''
+      },
+      email: {
+        elementType:'input',
+        elementConfig: {
+          type: 'email',
+          placeholder: 'Your email'
+        },
+        value:''
+      },
+      deliveryMethod: {
+        elementType:'select',
+        elementConfig: {
+          options: [
+            { name: 'Fastest', value: 'fastest' },
+            { name: 'Cheapest', value: 'cheapest' },
+          ]
+        },
+        value:''
+      }
     },
     loading: false
   }
@@ -24,16 +70,6 @@ class ContactDetails extends Component {
     const order = {
       ingredients: this.props.ingredients,
       price: this.props.totalPrice,
-      customer: {
-        name: 'Jock Dalby',
-        address: {
-          street: '30 Smith Street',
-          postCode: '1234',
-          country: 'USA'
-        },
-        email: 'test@test.com'
-      },
-      deliveryMethod: 'fastest'
     }
     axios.post('/orders.json', order)
       .then(res => {
@@ -54,6 +90,9 @@ class ContactDetails extends Component {
       <div className={classes.ContactDetails}>
         <h4>Enter your contact details</h4>
         { this.state.loading ? <Spinner/> : <form>
+          {this.state.orderForm.map(element => (
+            <Input elementType elementConfig value/>
+          ))}
           <Input inputtype="input" type="text" name="name" placeholder="Your name..." />
           <Input inputtype="input" type="email" name="email" placeholder="Your email..." />
           <Input inputtype="input" type="text" name="street" placeholder="Street" />
