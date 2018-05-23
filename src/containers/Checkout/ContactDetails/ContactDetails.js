@@ -86,17 +86,20 @@ class ContactDetails extends Component {
   }
 
   render () {
+
+    const formElements = Object.keys(this.state.orderForm).map(key => (
+      <Input label={key}
+        id={key}
+        elementType={this.state.orderForm[key].elementType}
+        elementConfig={this.state.orderForm[key].elementConfig}
+        value={this.state.orderForm[key].value}
+        />
+    ));
     return (
       <div className={classes.ContactDetails}>
         <h4>Enter your contact details</h4>
         { this.state.loading ? <Spinner/> : <form>
-          {this.state.orderForm.map(element => (
-            <Input elementType elementConfig value/>
-          ))}
-          <Input inputtype="input" type="text" name="name" placeholder="Your name..." />
-          <Input inputtype="input" type="email" name="email" placeholder="Your email..." />
-          <Input inputtype="input" type="text" name="street" placeholder="Street" />
-          <Input inputtype="input" type="text" name="postcode" placeholder="Postcode" />
+          {formElements}
           <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
         </form>}
       </div>
