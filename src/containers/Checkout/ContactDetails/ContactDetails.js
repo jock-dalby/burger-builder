@@ -67,9 +67,16 @@ class ContactDetails extends Component {
     event.preventDefault();
     this.setState({ loading: true });
 
+    const formData = {};
+
+    Object.keys(this.state.orderForm).forEach(key => {
+      formData[key] = this.state.orderForm[key].value;
+    })
+
     const order = {
       ingredients: this.props.ingredients,
       price: this.props.totalPrice,
+      orderData: formData
     }
     axios.post('/orders.json', order)
       .then(res => {
@@ -109,9 +116,10 @@ class ContactDetails extends Component {
     return (
       <div className={classes.ContactDetails}>
         <h4>Enter your contact details</h4>
-        { this.state.loading ? <Spinner/> : <form>
+        { this.state.loading ? <Spinner/> :
+        <form onSubmit={this.orderHandler}>
           {formElements}
-          <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button>
+          <Button btnType="Success">ORDER</Button>
         </form>}
       </div>
     );
