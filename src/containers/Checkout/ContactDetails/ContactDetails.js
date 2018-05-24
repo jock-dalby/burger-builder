@@ -90,7 +90,7 @@ class ContactDetails extends Component {
     const formElements = Object.keys(this.state.orderForm).map(key => (
       <Input label={key}
         id={key}
-        elementType={this.state.orderForm[key].elementType}
+        inputtype={this.state.orderForm[key].elementType}
         elementConfig={this.state.orderForm[key].elementConfig}
         value={this.state.orderForm[key].value}
         />

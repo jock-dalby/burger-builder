@@ -13,7 +13,10 @@ const input = (props) => {
       break;
     case('select'):
       inputElement = (
-        <select className={classes.InputElement} {...props.elementConfig} value={props.value}>
+        <select className={classes.InputElement} value={props.value}>
+          {props.elementConfig.options.map(option => (
+            <option key={option.value} value={option.value}>{option.name}</option>
+          ))}
         </select>
       )
       break;
