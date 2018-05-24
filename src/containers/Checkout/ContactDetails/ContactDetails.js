@@ -85,11 +85,22 @@ class ContactDetails extends Component {
       });
   }
 
+  onChangeHandler = (event, id) => {
+    const orderForm = {
+      ...this.state.orderForm
+    };
+    const updatedFormElement = { ...orderForm[id] };
+    updatedFormElement.value = event.target.value;
+    orderForm[id] = updatedFormElement;
+    this.setState({ orderForm })
+  }
+
   render () {
 
     const formElements = Object.keys(this.state.orderForm).map(key => (
       <Input label={key}
-        id={key}
+        key={key}
+        onChangeHandler={(event) => this.onChangeHandler(event, key)}
         inputtype={this.state.orderForm[key].elementType}
         elementConfig={this.state.orderForm[key].elementConfig}
         value={this.state.orderForm[key].value}
