@@ -67,16 +67,16 @@ class ContactDetails extends Component {
     event.preventDefault();
     this.setState({ loading: true });
 
-    const formData = {};
+    const formDetails = {};
 
     Object.keys(this.state.orderForm).forEach(key => {
-      formData[key] = this.state.orderForm[key].value;
+      formDetails[key] = this.state.orderForm[key].value;
     })
 
     const order = {
       ingredients: this.props.ingredients,
       price: this.props.totalPrice,
-      orderData: formData
+      orderDetails: formDetails
     }
     axios.post('/orders.json', order)
       .then(res => {
