@@ -83,10 +83,12 @@ class ContactDetails extends Component {
             { name: 'Cheapest', value: 'cheapest' },
           ]
         },
-        value:''
+        value:'',
+        valid: true
       }
     },
-    loading: false
+    loading: false,
+    formIsValid: false
   }
 
   orderHandler = (event) => {
@@ -155,7 +157,14 @@ class ContactDetails extends Component {
     updatedFormElement.value = event.target.value;
     updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
     orderForm[id] = updatedFormElement;
-    this.setState({ orderForm })
+
+    // Check overall form validity
+    let formIsValid = true;
+    Object.keys(orderForm).forEach(key => {
+      formIsValid = orderForm[key].valid && formIsValid;
+    })
+
+    this.setState({ orderForm, formIsValid });
   }
 
   render () {
@@ -180,7 +189,7 @@ class ContactDetails extends Component {
         { this.state.loading ? <Spinner/> :
         <form onSubmit={this.orderHandler}>
           {formElements}
-          <Button btnType="Success">ORDER</Button>
+          <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER</Button>
         </form>}
       </div>
     );
