@@ -115,18 +115,18 @@ class ContactDetails extends Component {
   }
 
   checkValidity = (value, rules) => {
-    let isValid = false;
+    let isValid = true;
 
     if (rules.required) {
-      isValid = value.trim().length > 0;
+      isValid = value.trim().length > 0 && isValid;
     }
 
     if (rules.minLength) {
-      isValid = value.length > rules.minLength;
+      isValid = value.length >= rules.minLength && isValid;
     }
 
     if (rules.maxLength) {
-      isValid = value.length < rules.maxLength;
+      isValid = value.length <= rules.maxLength && isValid;
     }
 
     return isValid;
@@ -149,6 +149,8 @@ class ContactDetails extends Component {
     const formElements = Object.keys(this.state.orderForm).map(key => (
       <Input label={key}
         key={key}
+        invalid={!this.state.orderForm[key].valid}
+        shouldValidate={this.state.orderForm[key].validation}
         onChangeHandler={(event) => this.onChangeHandler(event, key)}
         inputtype={this.state.orderForm[key].elementType}
         elementConfig={this.state.orderForm[key].elementConfig}
