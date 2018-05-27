@@ -4,7 +4,6 @@ import classes from './Input.css';
 const input = (props) => {
   // classes
   const inputClasses = [classes.inputElement];
-
   if(props.invalid === true && props.shouldValidate && props.touched) {
     inputClasses.push(classes.Invalid);
   }
@@ -13,14 +12,24 @@ const input = (props) => {
   // InputElement
   switch(props.inputtype) {
     case('input'):
-      inputElement = <input className={inputClasses.join(' ')} {...props.elementConfig} value={props.value} onChange={props.onChangeHandler}/>;
+      inputElement = <input className={inputClasses.join(' ')}
+        {...props.elementConfig}
+        value={props.value}
+        onBlur={props.onBlurHandler}
+        onChange={props.onChangeHandler}/>;
       break;
     case('textarea'):
-      inputElement = <textarea className={inputClasses.join(' ')} {...props.elementConfig} value={props.value} onChange={props.onChangeHandler}/>;
+      inputElement = <textarea className={inputClasses.join(' ')}
+        {...props.elementConfig}
+        value={props.value}
+        onBlur={props.onBlurHandler}
+        onChange={props.onChangeHandler}/>;
       break;
     case('select'):
       inputElement = (
-        <select className={inputClasses.join(' ')} value={props.value} onChange={props.onChangeHandler}>
+        <select className={inputClasses.join(' ')}
+          value={props.value}
+          onChange={props.onChangeHandler}>
           {props.elementConfig.options.map(option => (
             <option key={option.value} value={option.value}>{option.name}</option>
           ))}
@@ -28,7 +37,11 @@ const input = (props) => {
       )
       break;
     default:
-      inputElement = <input className={inputClasses.join(' ')} {...props.elementConfig} value={props.value} onChange={props.onChangeHandler}/>;
+      inputElement = <input className={inputClasses.join(' ')}
+        {...props.elementConfig}
+        value={props.value}
+        onBlur={props.onBlurHandler}
+        onChange={props.onChangeHandler}/>;
   }
   // ValidationError
   let validationError = null;

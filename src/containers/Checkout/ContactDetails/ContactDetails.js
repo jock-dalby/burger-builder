@@ -137,6 +137,16 @@ class ContactDetails extends Component {
     return isValid;
   }
 
+  onBlurHandler = (id) => {
+    const orderForm = {
+      ...this.state.orderForm
+    };
+    const updatedFormElement = { ...orderForm[id] };
+    updatedFormElement.touched = true;
+    orderForm[id] = updatedFormElement;
+    this.setState({ orderForm });
+  }
+
   onChangeHandler = (event, id) => {
     const orderForm = {
       ...this.state.orderForm
@@ -144,7 +154,6 @@ class ContactDetails extends Component {
     const updatedFormElement = { ...orderForm[id] };
     updatedFormElement.value = event.target.value;
     updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
-    updatedFormElement.touched = true;
     orderForm[id] = updatedFormElement;
     this.setState({ orderForm })
   }
@@ -158,6 +167,7 @@ class ContactDetails extends Component {
         invalid={!this.state.orderForm[key].valid}
         touched={this.state.orderForm[key].touched}
         shouldValidate={this.state.orderForm[key].validation}
+        onBlurHandler={() => this.onBlurHandler(key)}
         onChangeHandler={(event) => this.onChangeHandler(event, key)}
         inputtype={this.state.orderForm[key].elementType}
         elementConfig={this.state.orderForm[key].elementConfig}
