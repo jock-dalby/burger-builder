@@ -2,13 +2,15 @@ import React from 'react';
 import classes from './Input.css';
 
 const input = (props) => {
-  let inputElement = null;
+  // classes
   const inputClasses = [classes.inputElement];
 
-  if(props.invalid === true && props.shouldValidate) {
+  if(props.invalid === true && props.shouldValidate && props.touched) {
     inputClasses.push(classes.Invalid);
   }
 
+  let inputElement = null;
+  // InputElement
   switch(props.inputtype) {
     case('input'):
       inputElement = <input className={inputClasses.join(' ')} {...props.elementConfig} value={props.value} onChange={props.onChangeHandler}/>;
@@ -28,10 +30,16 @@ const input = (props) => {
     default:
       inputElement = <input className={inputClasses.join(' ')} {...props.elementConfig} value={props.value} onChange={props.onChangeHandler}/>;
   }
+  // ValidationError
+  let validationError = null;
+  if (props.invalid && props.touched) {
+      validationError = <p className={classes.ValidationError}>Please enter a valid {props.valueType}!</p>;
+  }
   return (
     <div className={classes.Input}>
       <label className={classes.Label}>{props.label}</label>
       {inputElement}
+      {validationError}
     </div>
   )
 }

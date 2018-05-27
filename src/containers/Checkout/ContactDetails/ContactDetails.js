@@ -18,7 +18,8 @@ class ContactDetails extends Component {
         validation: {
           required: true
         },
-        valid: false
+        valid: false,
+        touched: false
       },
       street: {
         elementType:'input',
@@ -30,7 +31,8 @@ class ContactDetails extends Component {
         validation: {
           required: true
         },
-        valid: false
+        valid: false,
+        touched: false
       },
       postCode: {
         elementType:'input',
@@ -44,7 +46,8 @@ class ContactDetails extends Component {
           minLength: 5,
           maxLength: 5
         },
-        valid: false
+        valid: false,
+        touched: false
       },
       country: {
         elementType:'input',
@@ -56,7 +59,8 @@ class ContactDetails extends Component {
         validation: {
           required: true
         },
-        valid: false
+        valid: false,
+        touched: false
       },
       email: {
         elementType:'input',
@@ -68,7 +72,8 @@ class ContactDetails extends Component {
         validation: {
           required: true
         },
-        valid: false
+        valid: false,
+        touched: false
       },
       deliveryMethod: {
         elementType:'select',
@@ -139,8 +144,8 @@ class ContactDetails extends Component {
     const updatedFormElement = { ...orderForm[id] };
     updatedFormElement.value = event.target.value;
     updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+    updatedFormElement.touched = true;
     orderForm[id] = updatedFormElement;
-    console.log(updatedFormElement);
     this.setState({ orderForm })
   }
 
@@ -149,7 +154,9 @@ class ContactDetails extends Component {
     const formElements = Object.keys(this.state.orderForm).map(key => (
       <Input label={key}
         key={key}
+        valueType={key}
         invalid={!this.state.orderForm[key].valid}
+        touched={this.state.orderForm[key].touched}
         shouldValidate={this.state.orderForm[key].validation}
         onChangeHandler={(event) => this.onChangeHandler(event, key)}
         inputtype={this.state.orderForm[key].elementType}
