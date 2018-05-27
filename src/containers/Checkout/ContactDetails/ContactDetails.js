@@ -9,12 +9,12 @@ class ContactDetails extends Component {
   state = {
     orderForm: {
       name: {
-        elementType:'input',
+        elementType: 'input',
         elementConfig: {
           type: 'text',
           placeholder: 'Your name'
         },
-        value:'',
+        value: '',
         validation: {
           required: true
         },
@@ -22,12 +22,12 @@ class ContactDetails extends Component {
         touched: false
       },
       street: {
-        elementType:'input',
+        elementType: 'input',
         elementConfig: {
           type: 'text',
           placeholder: 'Your street'
         },
-        value:'',
+        value: '',
         validation: {
           required: true
         },
@@ -35,12 +35,12 @@ class ContactDetails extends Component {
         touched: false
       },
       postCode: {
-        elementType:'input',
+        elementType: 'input',
         elementConfig: {
           type: 'text',
           placeholder: 'Your postcode'
         },
-        value:'',
+        value: '',
         validation: {
           required: true,
           minLength: 5,
@@ -50,12 +50,12 @@ class ContactDetails extends Component {
         touched: false
       },
       country: {
-        elementType:'input',
+        elementType: 'input',
         elementConfig: {
           type: 'text',
           placeholder: 'Your country'
         },
-        value:'',
+        value: '',
         validation: {
           required: true
         },
@@ -63,12 +63,12 @@ class ContactDetails extends Component {
         touched: false
       },
       email: {
-        elementType:'input',
+        elementType: 'input',
         elementConfig: {
           type: 'email',
           placeholder: 'Your email'
         },
-        value:'',
+        value: '',
         validation: {
           required: true
         },
@@ -76,16 +76,19 @@ class ContactDetails extends Component {
         touched: false
       },
       deliveryMethod: {
-        elementType:'select',
+        elementType: 'select',
         elementConfig: {
           options: [
+            { name: '', value: '' },
             { name: 'Fastest', value: 'fastest' },
             { name: 'Cheapest', value: 'cheapest' },
           ]
         },
-        validation: {},
-        value:'',
-        valid: true
+        validation: {
+          required: true
+        },
+        value: '',
+        valid: false
       }
     },
     loading: false,
