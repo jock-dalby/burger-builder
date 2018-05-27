@@ -83,6 +83,7 @@ class ContactDetails extends Component {
             { name: 'Cheapest', value: 'cheapest' },
           ]
         },
+        validation: {},
         value:'',
         valid: true
       }
