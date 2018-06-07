@@ -10,13 +10,6 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import { connect } from 'react-redux';
 import * as actionTypes from '../../store/actions';
 
-const INGREDIENT_PRICES = {
-  salad: 0.5,
-  cheese: 0.4,
-  meat: 1.3,
-  bacon: 0.7
-}
-
 class BurgerBuilder extends Component {
 
   state = {
@@ -63,19 +56,19 @@ class BurgerBuilder extends Component {
   }
 
   removeIngredientHandler = (type) => {
-    if (this.state.ingredients[ type ] <= 0) {
-      return
-    }
-    const updatedIngredients = {
-      ...this.state.ingredients
-    }
-    updatedIngredients[ type ] = updatedIngredients[ type ] - 1;
-    const updatedPrice = this.state.totalPrice - INGREDIENT_PRICES[ type ];
-    this.setState({
-      ingredients: updatedIngredients,
-      totalPrice: updatedPrice
-    })
-    this.updatePurchaseState(updatedIngredients);
+    // if (this.state.ingredients[ type ] <= 0) {
+    //   return
+    // }
+    // const updatedIngredients = {
+    //   ...this.state.ingredients
+    // }
+    // updatedIngredients[ type ] = updatedIngredients[ type ] - 1;
+    // const updatedPrice = this.state.totalPrice - INGREDIENT_PRICES[ type ];
+    // this.setState({
+    //   ingredients: updatedIngredients,
+    //   totalPrice: updatedPrice
+    // })
+    // this.updatePurchaseState(updatedIngredients);
   }
 
   purchaseHandler = () => {
