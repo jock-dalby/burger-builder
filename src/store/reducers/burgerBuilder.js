@@ -8,13 +8,9 @@ const INGREDIENT_PRICES = {
 }
 
 const initialState = {
-  ingredients: {
-    salad: 0,
-    bacon: 0,
-    meat: 0,
-    cheese: 0
-  },
-  totalPrice: 5.5
+  ingredients: null,
+  totalPrice: 5.5,
+  error: false
 }
 
 const reducer = (state = initialState, action) => {

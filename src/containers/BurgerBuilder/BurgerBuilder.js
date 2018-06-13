@@ -16,18 +16,6 @@ class BurgerBuilder extends Component {
   state = {
     // local UI state
     purchasing: false,
-    loading: false,
-    error: false
-  }
-
-  componentDidMount() {
-    axios.get('https://burger-builder-73216.firebaseio.com/ingredients.json')
-      .then(response => {
-        this.setState({
-          ingredients: response.data
-        })
-      })
-      .catch(err => this.setState({ error: true }));
   }
 
   updatePurchaseState(ingredients) {
