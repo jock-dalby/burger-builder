@@ -3,7 +3,6 @@ import classes from './ContactDetails.css'
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
-import axios from '../../../axios-orders';
 import { connect } from 'react-redux';
 
 class ContactDetails extends Component {
@@ -112,18 +111,7 @@ class ContactDetails extends Component {
       price: this.props.totalPrice,
       orderDetails: formDetails
     }
-    axios.post('/orders.json', order)
-      .then(res => {
-        this.setState({
-          loading: false
-        });
-        this.props.history.push('/');
-      })
-      .catch(err => {
-        this.setState({
-          loading: false
-        });
-      });
+
   }
 
   checkValidity = (value, rules) => {
