@@ -94,14 +94,12 @@ class ContactDetails extends Component {
         valid: false
       }
     },
-    loading: false,
     formIsValid: false
   }
 
   orderHandler = (event) => {
     // Prevent form from submitting
     event.preventDefault();
-    this.setState({ loading: true });
 
     const formDetails = {};
 
@@ -183,7 +181,7 @@ class ContactDetails extends Component {
     return (
       <div className={classes.ContactDetails}>
         <h4>Enter your contact details</h4>
-        { this.state.loading ? <Spinner/> :
+        { this.props.loading ? <Spinner/> :
         <form onSubmit={this.orderHandler}>
           {formElements}
           <Button btnType="Success" disabled={!this.state.formIsValid}>ORDER</Button>
@@ -196,13 +194,14 @@ class ContactDetails extends Component {
 const mapStateToProps = state => {
   return {
     ingredients: state.ingredients,
-    totalPrice: state.totalPrice
+    totalPrice: state.totalPrice,
+    loading: state.loading
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onPurchaseBurger: (orderData) => dispatch(actions.attemptPurchaseBurger(orderData))
+    onPurchaseBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
   }
 }
 
