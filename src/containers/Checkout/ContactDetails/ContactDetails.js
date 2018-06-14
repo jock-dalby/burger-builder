@@ -3,7 +3,10 @@ import classes from './ContactDetails.css'
 import Input from '../../../components/UI/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import Spinner from '../../../components/UI/Spinner/Spinner';
+import axios from '../../../axios-orders';
 import { connect } from 'react-redux';
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorHandler';
+import * as actions from '../../../store/actions/index';
 
 class ContactDetails extends Component {
   state = {
@@ -106,12 +109,13 @@ class ContactDetails extends Component {
       formDetails[key] = this.state.orderForm[key].value;
     })
 
-    const order = {
+    const orderData = {
       ingredients: this.props.ingredients,
       price: this.props.totalPrice,
       orderDetails: formDetails
     }
 
+    this.props.onPurchaseBurger(orderData);
   }
 
   checkValidity = (value, rules) => {
@@ -196,4 +200,10 @@ const mapStateToProps = state => {
   }
 }
 
-export default connect(mapStateToProps)(ContactDetails);
+const mapDispatchToProps = dispatch => {
+  return {
+    onPurchaseBurger: (orderData) => dispatch(actions.attemptPurchaseBurger(orderData))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withErrorHandler(ContactDetails, axios));
