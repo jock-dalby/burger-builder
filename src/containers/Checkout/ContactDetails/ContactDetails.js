@@ -82,16 +82,12 @@ class ContactDetails extends Component {
         elementType: 'select',
         elementConfig: {
           options: [
-            { name: '', value: '' },
             { name: 'Fastest', value: 'fastest' },
             { name: 'Cheapest', value: 'cheapest' },
           ]
         },
-        validation: {
-          required: true
-        },
         value: 'fastest',
-        valid: false
+        valid: true
       }
     },
     formIsValid: false

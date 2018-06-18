@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) => {
         orders: [
           ...state.orders,
           {
-            ...action.orderData,
+            ...action.orderDetails,
             id: action.orderId
           }
         ],
