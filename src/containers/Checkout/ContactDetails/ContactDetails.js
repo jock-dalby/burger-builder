@@ -90,7 +90,7 @@ class ContactDetails extends Component {
         validation: {
           required: true
         },
-        value: '',
+        value: 'fastest',
         valid: false
       }
     },
@@ -193,9 +193,9 @@ class ContactDetails extends Component {
 
 const mapStateToProps = state => {
   return {
-    ingredients: state.ingredients,
-    totalPrice: state.totalPrice,
-    loading: state.loading
+    ingredients: state.burgerBuilder.ingredients,
+    totalPrice: state.burgerBuilder.totalPrice,
+    loading: state.order.loading
   }
 }
 
