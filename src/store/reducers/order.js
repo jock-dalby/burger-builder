@@ -9,6 +9,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch(action.type) {
     case actionTypes.ATTEMPT_PURCHASE_BURGER:
+    case actionTypes.ATTEMPT_FETCH_ORDERS:
       return {
         ...state,
         loading: true
@@ -27,6 +28,7 @@ const reducer = (state = initialState, action) => {
         purchased: true
       }
     case actionTypes.PURCHASE_BURGER_FAILURE:
+    case actionTypes.FETCH_ORDERS_FAILURE:
       return {
         ...state,
         loading: false
@@ -35,6 +37,12 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         purchased: false
+      }
+    case actionTypes.FETCH_ORDERS_SUCCESS:
+      return {
+        ...state,
+        orders: action.orders,
+        loading: false
       }
     default:
       return state;
