@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Spinner from '../../components/UI/Spinner/Spinner';
 import Input from '../../components/UI/Input/Input';
 import Button from '../../components/UI/Button/Button';
 import * as actions from '../../store/actions/index';
@@ -115,11 +116,17 @@ class Auth extends Component {
         value={this.state.controls[ key ].value}
       />
     ));
+
+    const errorMessage = this.props.error
+      ? (<p className={classes.Error}>{this.props.error}</p>)
+      : null;
+
     return (
       <div className={classes.Auth}>
         <p>{this.state.isSignUp ? 'SIGN UP' : 'SIGN IN'}</p>
+        {errorMessage}
         <form onSubmit={this.onSubmitHandler}>
-          {formElements}
+          {this.props.loading ? <Spinner /> : formElements}
           <Button btnType="Success">SUBMIT</Button>
         </form>
           <Button clicked={this.switchAuthModeHandler}
@@ -129,10 +136,17 @@ class Auth extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    loading: state.auth.loading,
+    error: state.auth.error
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     onAuth: (email, password, method) => dispatch(actions.auth(email, password, method))
   }
 }
 
-export default connect(null, mapDispatchToProps)(Auth);
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);

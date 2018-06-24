@@ -44,8 +44,10 @@ export const auth = (email, password, method) => {
         dispatch(authSuccess(response.data))
       })
       .catch(err => {
-        console.error('Auth failure', err);
-        dispatch(authFailure(err));
+        const errorMessage = err.response.data.error.message;
+        console.error('Auth failure', errorMessage);
+        // axios wraps the original response in an error object
+        dispatch(authFailure(errorMessage));
       })
   }
 }
