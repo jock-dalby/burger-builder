@@ -11,7 +11,8 @@ export const attemptAuth = () => {
 export const authSuccess = (authData) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    authData
+    idToken: authData.idToken,
+    userId: authData.localId
   }
 }
 
