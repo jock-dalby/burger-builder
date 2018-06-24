@@ -38,7 +38,8 @@ class Auth extends Component {
         valid: false,
         touched: false
       }
-    }
+    },
+    isSignUp: true,
   }
 
   checkValidity = (value, rules) => {
@@ -90,7 +91,14 @@ class Auth extends Component {
     this.props.onAuth(
       this.state.controls.email.value,
       this.state.controls.password.value,
+      this.state.isSignUp ? 'signup' : 'signIn'
     )
+  }
+
+  switchAuthModeHandler = () => {
+    this.setState(prevState => {
+      return {isSignUp: !prevState.isSignUp}
+    })
   }
 
   render() {
@@ -109,10 +117,13 @@ class Auth extends Component {
     ));
     return (
       <div className={classes.Auth}>
+        <p>{this.state.isSignUp ? 'SIGN UP' : 'SIGN IN'}</p>
         <form onSubmit={this.onSubmitHandler}>
           {formElements}
           <Button btnType="Success">SUBMIT</Button>
         </form>
+          <Button clicked={this.switchAuthModeHandler}
+            btnType="Danger">SWITCH TO {this.state.isSignUp ? 'SIGN IN' : 'SIGN UP'}</Button>
       </div>
     );
   }
@@ -120,7 +131,7 @@ class Auth extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (email, password) => dispatch(actions.auth(email, password))
+    onAuth: (email, password, method) => dispatch(actions.auth(email, password, method))
   }
 }
 
