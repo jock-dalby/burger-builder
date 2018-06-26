@@ -110,7 +110,7 @@ class ContactDetails extends Component {
       orderDetails: formDetails
     }
 
-    this.props.onPurchaseBurger(orderData);
+    this.props.onPurchaseBurger(orderData, this.props.token);
   }
 
   checkValidity = ( value, rules ) => {
@@ -205,13 +205,14 @@ const mapStateToProps = state => {
   return {
     ingredients: state.burgerBuilder.ingredients,
     totalPrice: state.burgerBuilder.totalPrice,
-    loading: state.order.loading
+    loading: state.order.loading,
+    token: state.auth.token
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onPurchaseBurger: (orderData) => dispatch(actions.purchaseBurger(orderData))
+    onPurchaseBurger: (orderData, token) => dispatch(actions.purchaseBurger(orderData, token))
   }
 }
 
