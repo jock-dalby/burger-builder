@@ -61,10 +61,10 @@ export const attemptFetchOrders = () => {
   }
 }
 
-export const fetchOrders = () => {
+export const fetchOrders = (token) => {
   return dispatch => {
     dispatch(attemptFetchOrders());
-    axios.get('/orders.json')
+    axios.get('/orders.json?auth=' + token)
       .then(response => {
         const orders = Object.keys(response.data).map(key => ({ id: key, ...response.data[key]}));
         dispatch(fetchOrdersSuccess(orders))
