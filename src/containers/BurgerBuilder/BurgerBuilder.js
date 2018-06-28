@@ -22,7 +22,6 @@ class BurgerBuilder extends Component {
   }
 
   updatePurchaseState(ingredients) {
-    console.log(ingredients);
     const sum = Object.keys(ingredients)
       .map(key => ingredients[ key ])
       .reduce((sum, el) => {
@@ -31,40 +30,12 @@ class BurgerBuilder extends Component {
     return sum > 0;
   }
 
-  addIngredientHandler = (type) => {
-    this.props.addIngredientHandler(type)
-    // const updatedIngredients = {
-    //   ...this.state.ingredients
-    // }
-    // updatedIngredients[ type ] = updatedIngredients[ type ] + 1;
-    // const updatedPrice = this.state.totalPrice + INGREDIENT_PRICES[ type ];
-    // this.setState({
-    //   ingredients: updatedIngredients,
-    //   totalPrice: updatedPrice
-    // })
-    // this.updatePurchaseState(updatedIngredients);
-  }
-
-  removeIngredientHandler = (type) => {
-    // if (this.state.ingredients[ type ] <= 0) {
-    //   return
-    // }
-    // const updatedIngredients = {
-    //   ...this.state.ingredients
-    // }
-    // updatedIngredients[ type ] = updatedIngredients[ type ] - 1;
-    // const updatedPrice = this.state.totalPrice - INGREDIENT_PRICES[ type ];
-    // this.setState({
-    //   ingredients: updatedIngredients,
-    //   totalPrice: updatedPrice
-    // })
-    // this.updatePurchaseState(updatedIngredients);
-  }
-
   purchaseHandler = () => {
-    this.setState({
-      purchasing: true
-    })
+    if (this.props.isAuthenticated) {
+      this.setState({ purchasing: true})
+    } else {
+      this.props.history.push('/auth')
+    }
   }
 
   cancelPurchaseHandler = () => {
@@ -98,6 +69,7 @@ class BurgerBuilder extends Component {
             removeIngredient={type => this.props.onIngredientRemoved(type)}
             disabledInfo={disabledInfo}
             purchaseable={this.updatePurchaseState(this.props.ingredients)}
+            isAuthenticated={this.props.isAuthenticated}
             totalPrice={this.props.totalPrice}
             purchase={this.purchaseHandler}
           />
@@ -126,7 +98,8 @@ const mapStateToProps = state => {
   return {
     ingredients: state.burgerBuilder.ingredients,
     totalPrice: state.burgerBuilder.totalPrice,
-    error: state.burgerBuilder.error
+    error: state.burgerBuilder.error,
+    isAuthenticated: state.auth.token !== null
   }
 }
 
