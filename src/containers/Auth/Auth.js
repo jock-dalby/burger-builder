@@ -124,7 +124,7 @@ class Auth extends Component {
 
     let authRedirect = null;
     if (this.props.isAuthenticated) {
-      authRedirect = <Redirect to="/"/>
+      authRedirect = this.props.isBuilding ? <Redirect to="/checkout"/> : <Redirect to="/"/>;
     }
 
     return (
@@ -147,7 +147,8 @@ const mapStateToProps = state => {
   return {
     loading: state.auth.loading,
     error: state.auth.error,
-    isAuthenticated: state.auth.token !== null
+    isAuthenticated: state.auth.token !== null,
+    isBuilding: state.burgerBuilder.isBuilding
   }
 }
 

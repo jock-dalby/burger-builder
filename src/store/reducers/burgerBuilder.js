@@ -11,7 +11,12 @@ const INGREDIENT_PRICES = {
 const initialState = {
   ingredients: null,
   totalPrice: 5.5,
-  error: false
+  error: false,
+  // If the user is in process of building a burger.
+  // Used as a flag so if the user builds and then is redirected
+  // to login page, we know to redirect them to '/checkout/ after
+  // auth instead of '/'
+  isBuilding: false
 }
 
 const addIngredient = (state, action) => {
@@ -19,7 +24,8 @@ const addIngredient = (state, action) => {
   const updatedAddIngredients = updateObject(state.ingredients, updatedAddIngredient)
   const updatedAddIngredientState = {
     ingredients: updatedAddIngredients,
-    totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName]
+    totalPrice: state.totalPrice + INGREDIENT_PRICES[action.ingredientName],
+    isBuilding: true
   }
   return updateObject(state, updatedAddIngredientState);
 }
@@ -29,7 +35,8 @@ const removeIngredient = (state, action) => {
   const updatedRemoveIngredients = updateObject(state.ingredients, updatedRemoveIngredient)
   const updatedRemoveIngredientState = {
     ingredients: updatedRemoveIngredients,
-    totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName]
+    totalPrice: state.totalPrice - INGREDIENT_PRICES[action.ingredientName],
+    isBuilding: true
   }
   return updateObject(state, updatedRemoveIngredientState);
 }
@@ -38,7 +45,8 @@ const setIngredients = (state, action) => {
   return updateObject(state, {
     ingredients: action.ingredients,
     error: false,
-    totalPrice: 5.5
+    totalPrice: 5.5,
+    isBuilding: false
   });
 }
 
