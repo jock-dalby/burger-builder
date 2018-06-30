@@ -25,7 +25,7 @@ export const attemptPurchaseBurger = () => {
 export const purchaseBurger = (orderData, token) => {
   return dispatch => {
     dispatch(attemptPurchaseBurger());
-    axios.post('/orders.json?auth=' + token, orderData)
+    axios.post(`/orders.json?auth=${token}`, orderData)
       .then(response => {
         dispatch(purchaseBurgerSuccess(response.data.name, orderData));
       })
@@ -61,10 +61,10 @@ export const attemptFetchOrders = () => {
   }
 }
 
-export const fetchOrders = (token) => {
+export const fetchOrders = (token, userId) => {
   return dispatch => {
     dispatch(attemptFetchOrders());
-    axios.get('/orders.json?auth=' + token)
+    axios.get(`/orders.json?auth=${token}&orderBy="userId"&equalTo="${userId}"`)
       .then(response => {
         const orders = Object.keys(response.data).map(key => ({ id: key, ...response.data[key]}));
         dispatch(fetchOrdersSuccess(orders))
