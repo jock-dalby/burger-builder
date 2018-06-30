@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import Layout from '../src/hoc/Layout/Layout';
 import BurgerBuilder from './containers/BurgerBuilder/BurgerBuilder';
 import Checkout from './containers/Checkout/Checkout';
@@ -38,5 +38,5 @@ const mapDispatchToProps = dispatch => {
     onTryAutoSignIn: () => dispatch(actions.authCheckState())
   }
 }
-
-export default connect(null, mapDispatchToProps)(App);
+// Need withRouter when wrapping react router with connect
+export default withRouter(connect(null, mapDispatchToProps)(App));
