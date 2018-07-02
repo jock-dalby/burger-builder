@@ -15,11 +15,11 @@ class App extends Component {
     this.props.onTryAutoSignIn();
   }
 
+
   render() {
 
-    {/* Switch means we will only ever load one component (the first Route with a matching path
-        If using exact attribute you may not always need to use Switch but no harm in doing so.
-    */}
+    // Switch means we will only ever load one component (the first Route with a matching path
+    // If using exact attribute you may not always need to use Switch but no harm in doing so.
     let routes = (
       // Routing setup for unauthenticated users
       <Switch>

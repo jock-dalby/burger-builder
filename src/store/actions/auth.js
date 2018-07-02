@@ -58,7 +58,6 @@ export const auth = (email, password, method) => {
 
     axios.post(url, authData)
       .then(response => {
-        console.log('Auth success', response);
         // Todays date + expiry time and converting ms to sec
         const expirationDate = new Date (new Date().getTime() + response.data.expiresIn * 1000);
         localStorage.setItem('token', response.data.idToken);
@@ -69,7 +68,6 @@ export const auth = (email, password, method) => {
       })
       .catch(err => {
         const errorMessage = err.response.data.error.message;
-        console.error('Auth failure', errorMessage);
         // axios wraps the original response in an error object
         dispatch(authFailure(errorMessage));
       })
