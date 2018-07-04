@@ -28,7 +28,7 @@ describe('<NavigationItems />', () => {
     expect(wrapper.find(NavigationItem)).toHaveLength(2); // not jsx
   });
 
-  it(`should render 'Log out' <NavigationItem /> element if is NOT authenticated`, () => {
+  it(`should render 'Log in' <NavigationItem /> element if is NOT authenticated`, () => {
     expect(wrapper.contains(loginNavigationItem)).toEqual(true);
     expect(wrapper.contains(logoutNavigationItem)).toEqual(false);
   });
