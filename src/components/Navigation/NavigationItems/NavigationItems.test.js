@@ -17,4 +17,9 @@ describe('<NavigationItems />', () => {
     // the child components. Essentially rendering the code exactly as we see it in the component template.
     expect(wrapper.find(NavigationItem)).toHaveLength(2); // not jsx
   });
+
+  it('should render three <NavigationItem /> elements if is authenticated', () => {
+    const wrapper = shallow(<NavigationItems isAuthenticated='true'/>);
+    expect(wrapper.find(NavigationItem)).toHaveLength(3);
+  });
 });
